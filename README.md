@@ -50,6 +50,7 @@ We will deploy it into 3 layer. Public , Private and Data. Each layer will be as
 Before we start with deploying apps, we have several things to set up beforehand.First, we need to set up a key pair so we can access into the instances. We will create terraform.tfvars and store the variable inside. After that, we will create variables.tf and register variable called public_key of type string. Next we will put in the public key.
 ====PICTURE HERE==== CODE
 ====PICTURE HERE==== CODE
+<<<<<<< HEAD
 ====PICTURE HERE==== CODE
 
 Second things we will do is set up the security group for our application, we need to configure this so we can add it to the instances as they are created as part of the auto scaling group.
@@ -79,6 +80,8 @@ We will create an application load balancer. Make sure to make it external and a
 
 We will create an ouput so that it is available in the command line. Create some code inside output.tf. And don't forget to make up to see the outputs.
 ====PICTURE HERE==== CODE
+=======
+>>>>>>> 70c7dc0b8dba2f978455a9861cc5f5da5a7e6908
 ====PICTURE HERE==== OUTPUT
 
 ### 2. EC2 Instance (Private Layer)
@@ -106,7 +109,10 @@ Before starting to make the inventory.yaml file in ansible, we need to make a te
 ====PICTURE HERE==== AWS
 
 Now, we can start making the invetory.yaml file. We will run this through run_ansible.sh. We will use ">>" to redirect the output we made before, into inventory.yaml. This way, inventory.yaml will be generated through script with the IP inside.
+<<<<<<< HEAD
 ====PICTURE HERE==== AWS
+=======
+>>>>>>> 70c7dc0b8dba2f978455a9861cc5f5da5a7e6908
 
 ##### 2. Download the application and copy it to the local drive
 After having the public IP of our instances, we will run the run_ansible.sh which contain playbook.yaml
@@ -137,10 +143,13 @@ We have to make a techtestapp.tpl in order to create a .service file. In the tem
 ====PICTURE HERE==== code
 
 All configuration is done and now we run the script again. Then we will enter the public IP of the instances in web browser and we can see that the application is running on our instances.
+<<<<<<< HEAD
 
 ### Automate database instance
 We will be using updatedb-s to update the db, we will add a new task for it in our playbook.yml and add a new security group for in and out http for database.
 
+=======
+>>>>>>> 70c7dc0b8dba2f978455a9861cc5f5da5a7e6908
 
 ### Remote backend
 By default Terraform use local backend, we change it into S3 and DynamoDB. We will terraform init again since we will use S3 
