@@ -1,0 +1,7 @@
+"DbUser" = "${db_username}"
+"DbPassword" = "${db_pass}"
+"DbName" = "${db_name}"
+"DbHost" = "${db_host}"
+"DbPort" = "5432"
+"ListenHost" = "0.0.0.0"
+"ListenPort" = "80"

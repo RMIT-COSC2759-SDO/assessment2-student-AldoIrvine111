@@ -1,4 +1,42 @@
 - name: Deploy Application
   hosts: all
+  become: yes
+  become_method: sudo
   vars:
-  tasks: 
+  tasks:
+    - name: Initializing 
+      file:
+        path: "/etc/TechTestApp"
+        state: directory
+    - name: Install Application
+      unarchive:
+        src: https://github.com/servian/TechTestApp/releases/download/v.0.6.0/TechTestApp_v.0.6.0_linux64.zip
+        dest: "/etc/TechTestApp"
+        remote_src: yes
+    - name: Update Database Credenetial
+      shell: |
+        cd ../infra
+        terraform output db_update
+      register: db_output
+      delegate_to: localhost
+    - copy:
+        content: "{{db_output.stdout}}"
+        dest: /etc/TechTestApp/dist/conf.toml
+    - name: Create Service file
+      template:
+        src: ./templates/techtestapp.tpl
+        dest: /etc/systemd/system/techtestapp.service
+      become: yes
+      become_method: sudo
+    - name: updatedb -s 
+      shell: |
+        cd /etc/TechTestApp/dist/
+        ./TechTestApp updatedb -s
+    - name: Start Service
+      systemd:
+        daemon_reload: yes
+        name: techtestapp
+        state: started
+        enabled: yes
+      become: yes
+      become_method: sudo
