@@ -23,45 +23,45 @@ resource "aws_db_instance" "A2-db" {
   vpc_security_group_ids    = [aws_security_group.allow_http_ssh.id]
 }
 
-# resource "aws_s3_bucket" "bucket" {
-#   bucket = "assingment2"
-#   lifecycle {
-#     prevent_destroy = true
-#   }
+resource "aws_s3_bucket" "bucket" {
+  bucket = "assingment2"
+  lifecycle {
+    prevent_destroy = true
+  }
 
-#   versioning {
-#     enabled = true
-#   }
+  versioning {
+    enabled = true
+  }
 
-#   tags = {
-#     Name = "S3 Assignment2"
-#   }
-# }
+  tags = {
+    Name = "S3 Assignment2"
+  }
+}
 
-# resource "aws_dynamodb_table" "assignment2db-terraform-state-lock" {
-#   name           = "TechTestApp-DynamoDB-table"
-#   hash_key       = "LockID"
-#   read_capacity  = 20
-#   write_capacity = 20
+resource "aws_dynamodb_table" "assignment2db-terraform-state-lock" {
+  name           = "TechTestApp-DynamoDB-table"
+  hash_key       = "LockID"
+  read_capacity  = 20
+  write_capacity = 20
 
-#   attribute {
-#     name = "LockID"
-#     type = "S"
-#   }
+  attribute {
+    name = "LockID"
+    type = "S"
+  }
 
-#   tags = {
-#     name = "Assignment2 Terraform"
-#   }
-# }
+  tags = {
+    name = "Assignment2 Terraform"
+  }
+}
 
 
-# terraform {
-#   backend "s3" {
-#     encrypt = true
-#     bucket  = "terraformbackend"
-#     key     = "terraform"
-#     region  = "us-east-1"
-#     # dynamodb_table = "TechTestApp-DynamoDB-table"
-#   }
-# }
+terraform {
+  backend "s3" {
+    encrypt = true
+    bucket  = "terraformbackend"
+    key     = "terraform"
+    region  = "us-east-1"
+    # dynamodb_table = "TechTestApp-DynamoDB-table"
+  }
+}
 
